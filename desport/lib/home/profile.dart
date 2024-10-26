@@ -1,8 +1,8 @@
-import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class Profile extends StatefulWidget {
   final Map<String, dynamic> user;
@@ -14,44 +14,51 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  File? _imageFile;
+  String? _profileImagePath;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.user['profile_image'] != null) {
+      _profileImagePath =
+          "http://192.168.5.150/profile_images/${widget.user['profile_image']}";
+    }
+  }
 
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
-      setState(() {
-        _imageFile = File(image.path);
-      });
+      await _uploadImage(image.path);
     }
   }
 
-  Future<void> _uploadImage() async {
-    if (_imageFile == null) return;
-
+  Future<void> _uploadImage(String imagePath) async {
     final request = http.MultipartRequest(
       'POST',
-      Uri.parse('http://192.168.5.150:3000/upload'),
+      Uri.parse('http://192.168.5.150:3000/ftp/upload'),
     );
 
     request.files.add(await http.MultipartFile.fromPath(
       'image',
-      _imageFile!.path,
+      imagePath,
     ));
+    request.fields['username'] = widget.user['username'];
 
     final response = await request.send();
+    final responseBody = await response.stream.bytesToString();
+    final Map<String, dynamic> jsonResponse = json.decode(responseBody);
 
     if (response.statusCode == 200) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Imagem enviada com sucesso!'),
-          backgroundColor: Colors.green,
-        ),
-      );
+      String newImageName = jsonResponse['filename'];
+      setState(() {
+        _profileImagePath = "http://192.168.5.150/profile_images/$newImageName";
+      });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Falha ao enviar imagem'),
+          content: Text(
+              'Failed to upload image: ${jsonResponse['error'] ?? 'Unknown error'}'),
           backgroundColor: Colors.red,
         ),
       );
@@ -62,7 +69,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(15.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -70,17 +77,21 @@ class _ProfileState extends State<Profile> {
             Row(
               children: [
                 GestureDetector(
-                  onTap: () async {
-                    await _pickImage();
-                    if (_imageFile != null) {
-                      await _uploadImage();
-                    }
-                  },
+                  onTap: _pickImage,
                   child: CircleAvatar(
                     radius: 30,
-                    backgroundImage: _imageFile != null
-                        ? FileImage(_imageFile!)
-                        : NetworkImage(widget.user['profilePicture'] ?? ''),
+                    backgroundImage: _profileImagePath != null
+                        ? NetworkImage(_profileImagePath!)
+                        : null, // Quando não houver imagem de perfil, backgroundImage deve ser null
+                    child: _profileImagePath ==
+                            null // Exibe o ícone apenas se a imagem de perfil não estiver disponível
+                        ? Icon(
+                            Icons.add_a_photo,
+                            size: 30.0, // ajuste o tamanho conforme necessário
+                            color: Colors
+                                .purple, // ajuste a cor conforme necessário
+                          )
+                        : null, // Se houver uma imagem, não exiba o ícone
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -90,21 +101,18 @@ class _ProfileState extends State<Profile> {
                     Text(
                       widget.user['name'],
                       style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
+                          fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       '@${widget.user['username']}',
-                      style: const TextStyle(fontSize: 16, color: Colors.grey),
+                      style: const TextStyle(
+                          fontSize: 13, color: Color.fromARGB(150, 0, 0, 0)),
                     ),
                   ],
                 ),
               ],
             ),
             const SizedBox(height: 20),
-            Text(
-              'Email: ${widget.user['email']}',
-              style: const TextStyle(fontSize: 18),
-            ),
           ],
         ),
       ),

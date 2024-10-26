@@ -1,3 +1,21 @@
 {
-  
+    "Hi": "Hi",
+    "Welcome Back!": "Welcome Back!",
+    "Sign In": "Sign In",
+    "username": "Username",
+    "password": "Password",
+    "Remember Me": "Remember Me",
+    "Login": "Login",
+    "Forgot password?": "Forgot password?",
+    "Don't have an account? Sign up": "Don't have an account? Sign up",
+    "Sign Up": "Sign Up",
+    "Create your account": "Create your account",
+    "Create Account": "Create Account",
+    "Name": "Name",
+    "Username": "Username",
+    "Email": "Email",
+    "Password": "Password",
+    "Confirm Password": "Confirm Password",
+    "I have read and accept the terms and conditions of service.": "I have read and accept the terms and conditions of service.",
+    "Already have an account? Sign In": "Already have an account? Sign In"
 }

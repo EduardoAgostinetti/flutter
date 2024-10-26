@@ -1,3 +1,4 @@
+import 'package:desport/home/settings.dart';
 import 'package:flutter/material.dart';
 import 'profile.dart';
 
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> {
           Center(child: const Text('Challenges Screen')),
           Center(child: const Text('Awards Screen')),
           Profile(user: widget.user),
-          Center(child: const Text('Settings Screen')),
+          SettingsPage(),
         ],
       ),
       bottomNavigationBar: Stack(
