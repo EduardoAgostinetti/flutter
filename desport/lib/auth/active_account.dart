@@ -3,7 +3,7 @@ import 'package:desport/home.dart';
 import 'package:desport/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'loading.dart';
+import '../loading.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
 

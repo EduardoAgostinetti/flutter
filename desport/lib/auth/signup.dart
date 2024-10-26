@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:easy_localization/easy_localization.dart';
 import 'signin.dart';
-import 'loading.dart';
+import '../loading.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

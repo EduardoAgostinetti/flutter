@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'signin.dart';
+import './auth/signin.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'signup.dart';
 import 'forgot.dart';
-import 'loading.dart';
+import '../loading.dart';
 import 'active_account.dart';
-import 'home.dart';
+import '../home.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
