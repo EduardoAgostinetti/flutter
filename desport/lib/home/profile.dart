@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -24,6 +26,38 @@ class _ProfileState extends State<Profile> {
     }
   }
 
+  Future<void> _uploadImage() async {
+    if (_imageFile == null) return;
+
+    final request = http.MultipartRequest(
+      'POST',
+      Uri.parse('http://192.168.5.150:3000/upload'),
+    );
+
+    request.files.add(await http.MultipartFile.fromPath(
+      'image',
+      _imageFile!.path,
+    ));
+
+    final response = await request.send();
+
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Imagem enviada com sucesso!'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Falha ao enviar imagem'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,18 +67,20 @@ class _ProfileState extends State<Profile> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const SizedBox(height: 60),
-            // Cabeçalho com a foto, nome e usuário
             Row(
               children: [
                 GestureDetector(
-                  onTap: _pickImage, // Chama a função ao tocar na foto
+                  onTap: () async {
+                    await _pickImage();
+                    if (_imageFile != null) {
+                      await _uploadImage();
+                    }
+                  },
                   child: CircleAvatar(
-                    radius: 30, // Tamanho do círculo da foto
+                    radius: 30,
                     backgroundImage: _imageFile != null
-                        ? FileImage(
-                            _imageFile!) // Se a imagem for selecionada, use-a
-                        : NetworkImage(widget.user['profilePicture'] ??
-                            ''), // Ou use a imagem padrão
+                        ? FileImage(_imageFile!)
+                        : NetworkImage(widget.user['profilePicture'] ?? ''),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -65,13 +101,10 @@ class _ProfileState extends State<Profile> {
               ],
             ),
             const SizedBox(height: 20),
-            // Informações adicionais do usuário
             Text(
               'Email: ${widget.user['email']}',
               style: const TextStyle(fontSize: 18),
             ),
-            const SizedBox(height: 20),
-            // Adicione mais informações do usuário aqui se necessário
           ],
         ),
       ),
