@@ -36,6 +36,10 @@ class _LoginScreenState extends State<LoginScreen> {
     if (username != null && password != null) {
       _usernameController.text = username;
       _passwordController.text = password;
+      setState(() {
+        _rememberMe = true;
+      });
+      _signIn();
     }
   }
 
