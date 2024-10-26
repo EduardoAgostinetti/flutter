@@ -46,13 +46,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
       removeLoading(context);
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
       );
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
             '${responseBody['message']}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
             ),
           ),
@@ -66,7 +66,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         SnackBar(
           content: Text(
             'Failed to sign up: ${responseBody['message']}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
             ),
           ),
@@ -308,7 +308,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginScreen()),
+                                builder: (context) => const LoginScreen()),
                           );
                         },
                         child: Text(

@@ -36,7 +36,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
         SnackBar(
           content: Text(
             '${responseBody['message']}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
             ),
           ),
@@ -56,7 +56,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
         SnackBar(
           content: Text(
             'Failed to sign in: ${responseBody['message']}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
             ),
           ),
@@ -188,7 +188,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginScreen()),
+                                builder: (context) => const LoginScreen()),
                           );
                         },
                         child: Text(
@@ -205,7 +205,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SignUpScreen()),
+                                builder: (context) => const SignUpScreen()),
                           );
                         },
                         child: Text(
@@ -267,7 +267,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         SnackBar(
           content: Text(
             '${responseBody['message']}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
             ),
           ),
@@ -277,7 +277,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       );
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
       );
     } else {
       removeLoading(context);
@@ -285,7 +285,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         SnackBar(
           content: Text(
             'Failed to sign in: ${responseBody['message']}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
             ),
           ),
@@ -485,7 +485,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginScreen()),
+                                builder: (context) => const LoginScreen()),
                           );
                         },
                         child: Text(

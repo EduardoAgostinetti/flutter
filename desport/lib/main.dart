@@ -9,7 +9,7 @@ void main() async {
     EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('pt')],
       path: 'assets/translations',
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      home: LoginScreen(),
+      home: const LoginScreen(),
       theme: ThemeData(
         primarySwatch: Colors.purple,
         fontFamily: 'Montserrat',

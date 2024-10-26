@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:desport/home.dart';
-import 'package:desport/signin.dart';
+import 'package:desport/auth/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../loading.dart';
@@ -41,7 +41,7 @@ class _ActiveAccountScreenState extends State<ActiveAccountScreen> {
         SnackBar(
           content: Text(
             '${responseBody['message']}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
             ),
           ),
@@ -61,7 +61,7 @@ class _ActiveAccountScreenState extends State<ActiveAccountScreen> {
         SnackBar(
           content: Text(
             'Failed to sign in: ${responseBody['message']}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
             ),
           ),

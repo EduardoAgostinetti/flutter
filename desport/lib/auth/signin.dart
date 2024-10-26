@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
         SnackBar(
           content: Text(
             '${responseBody['message']}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
             ),
           ),
@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
         SnackBar(
           content: Text(
             'Failed to sign in: ${responseBody['message']}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
             ),
           ),
@@ -131,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
         SnackBar(
           content: Text(
             'Failed to sign in: ${responseBody['message']}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
             ),
           ),
@@ -314,7 +314,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: const Text(
                         'Don\'t have an account? Sign up',
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.purple,
                           decoration: TextDecoration.underline,
                         ),

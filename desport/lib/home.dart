@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class HomePage extends StatefulWidget {
   final Map<String, dynamic> user;
 
-  HomePage({required this.user});
+  const HomePage({super.key, required this.user});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page'),
+        title: const Text('Home Page'),
       ),
       body: Center(
         child: Column(
@@ -30,20 +30,20 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             Text(
               'Bem-vindo, ${widget.user['name']}!',
-              style: TextStyle(fontSize: 24),
+              style: const TextStyle(fontSize: 24),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Ação ao clicar no botão
                 print('Button clicked!');
               },
-              child: Text('Click Me'),
+              child: const Text('Click Me'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               'Você está na aba: ${_selectedIndex + 1}',
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
           ],
         ),
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.purple,
             selectedItemColor: Colors.white,
             unselectedItemColor: Colors.white.withOpacity(0.6),
-            items: [
+            items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: 'Home',
