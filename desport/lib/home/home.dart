@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'profile.dart';
 
 class HomePage extends StatefulWidget {
   final Map<String, dynamic> user;
@@ -21,32 +22,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Page'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Bem-vindo, ${widget.user['name']}!',
-              style: const TextStyle(fontSize: 24),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Ação ao clicar no botão
-                print('Button clicked!');
-              },
-              child: const Text('Click Me'),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              'Você está na aba: ${_selectedIndex + 1}',
-              style: const TextStyle(fontSize: 18),
-            ),
-          ],
-        ),
+      body: IndexedStack(
+        index: _selectedIndex, // Controla qual tela será exibida
+        children: [
+          Center(child: const Text('Home Screen')),
+          Center(child: const Text('Challenges Screen')),
+          Center(child: const Text('Awards Screen')),
+          Profile(user: widget.user),
+          Center(child: const Text('Settings Screen')),
+        ],
       ),
       bottomNavigationBar: Stack(
         children: [
@@ -54,19 +38,19 @@ class _HomePageState extends State<HomePage> {
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.purple,
             selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.white.withOpacity(0.6),
+            unselectedItemColor: Colors.white.withOpacity(0.4),
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                label: 'Search',
+                icon: Icon(Icons.star),
+                label: 'Challanges',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.notifications),
-                label: 'Notifications',
+                icon: Icon(Icons.card_giftcard),
+                label: 'Awards',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),
@@ -85,7 +69,7 @@ class _HomePageState extends State<HomePage> {
             left: MediaQuery.of(context).size.width / 5 * _selectedIndex,
             width: MediaQuery.of(context).size.width / 5,
             child: Container(
-              height: 4,
+              height: 5,
               color: Colors.white,
             ),
           ),

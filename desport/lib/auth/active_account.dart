@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:desport/home.dart';
+import 'package:desport/home/home.dart';
 import 'package:desport/auth/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
