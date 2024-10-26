@@ -7,7 +7,7 @@ import 'signup.dart';
 import 'forgot.dart';
 import '../loading.dart';
 import 'active_account.dart';
-import '../home.dart';
+import '../home/home.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
